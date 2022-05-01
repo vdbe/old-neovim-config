@@ -1,0 +1,7 @@
+require("nobody.settings")
+require("nobody.keymaps")
+require("nobody.plugins")
+require("nobody.colorscheme")
+require("nobody.cmp")
+require("nobody.lsp")
+require("nobody.telescope")
