@@ -1,6 +1,17 @@
 local opt = vim.opt  -- to set options
 local prefix = vim.fn.stdpath('config')
 
+table.insert(opt.path, "**")
+
+opt.wildignore:prepend('*.o')
+opt.wildignore:prepend('*.pyc')
+opt.wildignore:prepend('*_build/*')
+opt.wildignore:prepend('**/coverage/*')
+opt.wildignore:prepend('**/node_modules/*')
+opt.wildignore:prepend('**/android/*')
+opt.wildignore:prepend('**/ios/*')
+opt.wildignore:prepend('**/.git/*')
+
 opt.relativenumber = true
 opt.hlsearch = false
 opt.hidden = true
