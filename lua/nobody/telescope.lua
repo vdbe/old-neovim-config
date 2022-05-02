@@ -46,13 +46,13 @@ require("telescope").load_extension("fzy_native")
 local opts = { noremap=true, silent=true }
 
 -- Search
-vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = 'Find files in the current working directory', noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = 'Live grep in the current working directory', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>lua require("telescope.builtin").buffers()<cr>', { desc = 'Find open buffer', noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search in the vim help files',  noremap = true, silent = true })
 
 -- Git
-vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_branches()<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>gt', '<cmd>lua require("telescope").extensions.git_worktree.git_worktrees()<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>gT', '<cmd>lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>', opts)
+vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_branches()<cr>', { desc = 'Change git branch', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gt', '<cmd>lua require("telescope").extensions.git_worktree.git_worktrees()<cr>', { desc = 'Change git working tree', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>gT', '<cmd>lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>', { desc = 'delete git working tree', noremap = true, silent = true })
 
