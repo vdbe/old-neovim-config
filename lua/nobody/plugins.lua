@@ -60,7 +60,7 @@ return packer.startup(function(use)
   use "simrat39/symbols-outline.nvim"
 
   -- telescope
-  use  { 
+  use  {
     "nvim-telescope/telescope.nvim",
     requires = { {"nvim-lua/plenary.nvim"} }
   }
@@ -69,9 +69,20 @@ return packer.startup(function(use)
     requries = { {"nvim-telescope/telescope-fzy-native.nvim"} }
   }
 
+  -- treesitter
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+  }
+
   -- git
   use "ThePrimeagen/git-worktree.nvim"
   use "lewis6991/gitsigns.nvim"
+
+  use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

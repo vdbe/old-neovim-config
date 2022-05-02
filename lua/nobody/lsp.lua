@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
   --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatg()<CR>', opts)
 
   -- Custom
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>bf', '<cmd>lua vim.lsp.buf.format({async = true })<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>bf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
   vim.keymap.set({'n'}, "<leader>vws", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { noremap = true })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -88,7 +88,7 @@ require("lspconfig").sumneko_lua.setup(config({
 	},
 }))
 
-local opts = {
+local symbol_opts = {
   -- whether to highlight the currently hovered symbol
   -- disable if your cpu usage is higher than you want it
   -- or you just hate the highlight
@@ -100,5 +100,5 @@ local opts = {
   show_guides = true,
 }
 
-require("symbols-outline").setup(opts)
+require("symbols-outline").setup(symbol_opts)
 

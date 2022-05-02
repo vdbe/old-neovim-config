@@ -1,14 +1,13 @@
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local previewers = require("telescope.previewers")
-local action_state = require("telescope.actions.state")
-local conf = require("telescope.config").values
-local actions = require("telescope.actions")
-
 require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
     -- config_key = value,
+    file_sorter = require("telescope.sorters").get_fzy_sorter,
+    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+
+    color_devicons = true,
     mappings = {
       i = {
         -- map actions.which_key to <C-h> (default: <C-/>)
@@ -33,8 +32,15 @@ require('telescope').setup{
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+    fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+    },
   }
 }
+
+require("telescope").load_extension("git_worktree")
+require("telescope").load_extension("fzy_native")
 
 -- Using Lua functions
 local opts = { noremap=true, silent=true }
