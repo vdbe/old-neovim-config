@@ -60,6 +60,8 @@ return packer.startup(function(use)
   use "simrat39/symbols-outline.nvim"
 
   -- telescope
+  use "nvim-lua/popup.nvim"
+  use "nvim-lua/plenary.nvim"
   use  {
     "nvim-telescope/telescope.nvim",
     requires = { {"nvim-lua/plenary.nvim"} }
