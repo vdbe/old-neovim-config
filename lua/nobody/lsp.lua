@@ -45,23 +45,41 @@ end
 local function config(_config)
   return vim.tbl_deep_extend("force", {
     capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    on_attach = function()
-    end,
+    on_attach = on_attach,
   }, _config or {})
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'rust_analyzer', 'tsserver' }
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
+--local servers = { 'rust_analyzer', 'tsserver' }
+--for _, lsp in pairs(servers) do
+--  require('lspconfig')[lsp].setup {
+--    on_attach = on_attach,
+--    flags = {
+--      -- This will be the default in neovim 0.7+
+--      debounce_text_changes = 150,
+--    }
+--  }
+--end
+
+local lspconfig = require('lspconfig')
+lspconfig.tsserver.setup(config())
+lspconfig.pyright.setup(config({
+    cmd = { vim.fn.stdpath('config') .. '/python-env/bin/pyright-langserver', "--stdio" },
+}))
+lspconfig.rust_analyzer.setup(config({
+	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+	--[[
+    settings = {
+        rust = {
+            unstable_features = true,
+            build_on_save = false,
+            all_features = true,
+        },
     }
-  }
-end
+    --]]
+}))
+
 
 require("lspconfig").sumneko_lua.setup(config({
 	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },

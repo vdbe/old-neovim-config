@@ -31,6 +31,7 @@ opt.undodir = prefix .. '/undo'
 opt.undofile = true
 opt.incsearch = true
 opt.scrolloff = 8
+opt.mouse = 'a'
 opt.signcolumn = "yes"
 
 -- Give more space for displaying message.
@@ -45,4 +46,7 @@ opt.updatetime = 50
 vim.opt.shortmess:append({ c = true })
 
 opt.colorcolumn = "80"
+
+-- providers
+vim.g.python3_host_prog = vim.fn.stdpath('config') .. '/python-env/bin/python'
 

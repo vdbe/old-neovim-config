@@ -3,3 +3,4 @@ plugin/packer_compiled.lua
 backup
 swap
 undo
+python-env
