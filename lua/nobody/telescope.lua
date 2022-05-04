@@ -46,7 +46,7 @@ require("telescope").load_extension("fzy_native")
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = 'Find files in the current working directory', noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = 'Live grep in the current working directory', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>lua require("telescope.builtin").buffers()<cr>', { desc = 'Find open buffer', noremap = true, silent = true })
---vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search in the vim help files',  noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search in the vim help files',  noremap = true, silent = true })
 
 -- Git
 vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_branches()<cr>', { desc = 'Change git branch', noremap = true, silent = true })
@@ -59,4 +59,5 @@ vim.api.nvim_set_keymap('n', '<leader>gC', '<cmd>lua require("telescope.builtin"
 vim.api.nvim_set_keymap('n', '<leader>s', '<cmd>lua require("telescope.builtin").treesitter()<cr>', { desc = 'Lists Function names, variables, from Treesitter', noremap = true, silent = true })
 
 -- Keymap help
-vim.api.nvim_set_keymap('n', '<leader>hk', '<cmd>lua require("telescope.builtin").keymaps()<cr>', { desc = 'Lists normal mode keymappings', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fk', '<cmd>lua require("telescope.builtin").keymaps()<cr>', { desc = 'Lists normal mode keymappings', noremap = true, silent = true })
+
