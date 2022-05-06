@@ -12,6 +12,7 @@ opt.wildignore:prepend('**/android/*')
 opt.wildignore:prepend('**/ios/*')
 opt.wildignore:prepend('**/.git/*')
 
+opt.compatible = false
 opt.relativenumber = true
 opt.hlsearch = false
 opt.hidden = true
@@ -33,6 +34,7 @@ opt.incsearch = true
 opt.scrolloff = 8
 opt.mouse = 'a'
 opt.signcolumn = "yes"
+opt.autochdir = true
 
 -- Give more space for displaying message.
 opt.cmdheight = 1

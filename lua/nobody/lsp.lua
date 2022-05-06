@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
   --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatg()<CR>', { desc = '', noremap = true, silent = false })
 
   -- Custom
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>bf', '<cmd>lua  vim.lsp.buf.formatting({async = true })<CR>', { desc = 'Format the current buffer', noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>bf', '<cmd>lua  vim.lsp.buf.format({async = true })<CR>', { desc = 'Format the current buffer', noremap = true, silent = true })
   vim.keymap.set({'n'}, "<leader>vws", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = 'TODO:', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })

@@ -36,6 +36,17 @@ require('telescope').setup{
         override_generic_sorter = false,
         override_file_sorter = true,
     },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+      "$(git rev-parse --show-toplevel)"
+    }
   }
 }
 
@@ -43,10 +54,12 @@ require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("fzy_native")
 
 -- Search
-vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = 'Find files in the current working directory', noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader><leader>', '<CMD>lua require("nobody.telescope-config").project_files()<CR>', { desc = 'Fuzzy search through the output of `git ls-files` command, respects .gitignore', noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = 'Find files in the current working directory', noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = 'Live grep in the current working directory', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>lua require("telescope.builtin").buffers()<cr>', { desc = 'Find open buffer', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search in the vim help files',  noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fc', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search for vim/plugin commands',  noremap = true, silent = true })
 
 -- Git
 vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_branches()<cr>', { desc = 'Change git branch', noremap = true, silent = true })
