@@ -1,6 +1,8 @@
 local opt = vim.opt  -- to set options
 local prefix = vim.fn.stdpath('config')
 
+vim.g.root_dir = vim.env.PWD
+
 table.insert(opt.path, "**")
 
 opt.wildignore:prepend('*.o')

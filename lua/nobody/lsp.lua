@@ -12,6 +12,8 @@ vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { 
 vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Add buffer diagnostics (errors/warnings) to the location list", noremap = true, silent = false})
 
 local on_attach = function(client, bufnr)
+  --vim.g.lsp_root_dir = dump(client['config']['root_dir'])
+
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
