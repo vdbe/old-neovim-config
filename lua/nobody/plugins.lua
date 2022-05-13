@@ -58,6 +58,7 @@ return packer.startup(function(use)
 
   -- No idea still need a category
   use "simrat39/symbols-outline.nvim"
+  use "tpope/vim-fugitive"
 
   -- telescope
   use "nvim-lua/popup.nvim"
