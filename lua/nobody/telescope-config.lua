@@ -17,8 +17,7 @@ M.project_files = function()
 end
 
 M.project_live_grep = function()
-    local ok = pcall(require "telescope.builtin".git_files, git_opts)
-    if not ok then require "telescope.builtin".find_files(none_git_opts) end
+    require "telescope.builtin".live_grep(none_git_opts)
 end
 
 return M
