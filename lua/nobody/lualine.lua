@@ -11,6 +11,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
+    --lualine_c = {{'filename'}, {function() return require('nvim-treesitter').statusline() end}},
     lualine_c = {{'filename'}, {function() return require('nvim-treesitter').statusline() end}},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},

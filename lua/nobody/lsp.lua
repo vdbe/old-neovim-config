@@ -65,6 +65,7 @@ end
 
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup(config())
+lspconfig.html.setup(config())
 lspconfig.pyright.setup(config({
     cmd = { vim.fn.stdpath('config') .. '/python-env/bin/pyright-langserver', "--stdio" },
 }))
