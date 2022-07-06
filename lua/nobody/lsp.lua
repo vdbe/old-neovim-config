@@ -1,3 +1,16 @@
+local lsp_installer_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+
+if not lsp_installer_ok then
+  return
+end
+
+lsp_installer.setup {
+  -- A list of servers to automatically install if they're not already installed
+  --ensure_installed = { "rust_analyzer", "bashls", "cssls", "cssmodules_ls", "eslint", "graphql", "html", "jsonls", "sumneko_lua", "tailwindcss", "tsserver", "emmet_ls" },
+  -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed
+  --automatic_installation = true,
+}
+
 local sumneko_root_path = vim.fn.expand("~/repos/lua-language-server")
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 
@@ -6,10 +19,10 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', { desc = "Show error/waring in popup", noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', { desc = "Show error/waring in popup", noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = "Goto prev error/waring", noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = "Goto next error/waring", noremap = true, silent = false})
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Add buffer diagnostics (errors/warnings) to the location list", noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Add buffer diagnostics (errors/warnings) to the location list", noremap = true, silent = false})
 
 local on_attach = function(client, bufnr)
   --vim.g.lsp_root_dir = dump(client['config']['root_dir'])
@@ -22,24 +35,26 @@ local on_attach = function(client, bufnr)
   -- Default
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', { desc = 'Go to declaration', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { desc = 'Go to definition', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', { desc = 'Goto the definition of the word under the cursor, if there\'s only one, otherwise show all options in Telescope', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show hint for part under the cursor', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { desc = 'Go to implementation', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>', { desc = ' 	Goto the implementation of the word under the cursor if there\'s only one, otherwise show all options in Telescope', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { desc = 'Signature help', noremap = true, silent = false })
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = '', noremap = true, silent = false })
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = '', noremap = true, silent = false })
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = '', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'Go to type definition', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename reference under the cursor', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Select a code action available at the current cursor position', noremap = true, silent = false })
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = '', noremap = true, silent = false })
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = '', noremap = true, silent = false })
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = '', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'Go to type definition', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename reference under the cursor', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Select a code action available at the current cursor position', noremap = true, silent = false })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { desc = 'List all the refrences to the symbol under the cursor', noremap = true, silent = false })
-  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatg()<CR>', { desc = '', noremap = true, silent = false })
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatg()<CR>', { desc = '', noremap = true, silent = false })
 
   -- Custom
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>bf', '<cmd>lua  vim.lsp.buf.format({async = true })<CR>', { desc = 'Format the current buffer', noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>bf', '<cmd>lua  vim.lsp.buf.format({async = true })<CR>', { desc = 'Format the current buffer', noremap = true, silent = true })
   vim.keymap.set({'n'}, "<leader>vws", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", { desc = 'TODO:', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>Wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = 'TODO:', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>Wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>Wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', { desc = 'TODO:', noremap = true, silent = false })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>Wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', { desc = 'TODO:', noremap = true, silent = false })
   vim.keymap.set({'i'}, "<C-h>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = 'Show signature help of the symbol under the cursor', noremap = true, silent = false })
 end
 
@@ -70,7 +85,36 @@ lspconfig.pyright.setup(config({
     cmd = { vim.fn.stdpath('config') .. '/python-env/bin/pyright-langserver', "--stdio" },
 }))
 lspconfig.rust_analyzer.setup(config({
-	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importEnforceGranularity = true,
+                importPrefix = "crate"
+            },
+            --cargo = {
+            --    allFeatures = true
+            --},
+            checkOnSave = {
+                -- default: `cargo check`
+                command = "clippy"
+            },
+            procMacro = {
+                enable = true,
+                attributes = {
+                    enable = true
+                }
+                --ignored = {}
+            },
+            restartServerOnConfigChange = true
+        },
+        inlayHints = {
+            lifetimeElisionHints = {
+                enable = true,
+                useParameterNames = true
+            },
+        },
+    }
 	--[[
     settings = {
         rust = {
@@ -83,7 +127,7 @@ lspconfig.rust_analyzer.setup(config({
 }))
 
 
-require("lspconfig").sumneko_lua.setup(config({
+lspconfig.sumneko_lua.setup(config({
 	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
 	settings = {
 		Lua = {
@@ -107,6 +151,15 @@ require("lspconfig").sumneko_lua.setup(config({
 		},
 	},
 }))
+
+
+for _, server in ipairs { "bashls", "tsserver", "tailwindcss", "eslint", "jsonls", "cssls", "cssmodules_ls", "graphql", "html", "emmet_ls" } do
+  lspconfig[server].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
+
 
 local symbol_opts = {
   -- whether to highlight the currently hovered symbol

@@ -51,6 +51,7 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig" -- Collection of configurations for the built-in LSP client
     use "onsails/lspkind-nvim"
     use "nvim-lua/lsp_extensions.nvim"
+    use "williamboman/nvim-lsp-installer"
 
     -- Snippets
     use "L3MON4D3/LuaSnip"

@@ -58,7 +58,8 @@ vim.api.nvim_set_keymap('n', '<leader>F', '<cmd>lua require("telescope.builtin")
 vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>lua require("nobody.telescope-config").project_live_grep()<cr>', { desc = 'Live grep in the current working directory', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', '<cmd>lua require("telescope.builtin").buffers()<cr>', { desc = 'Find open buffer', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search in the vim help files',  noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fc', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = 'Search for vim/plugin commands',  noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fc', '<cmd>lua require("telescope.builtin").commands()<cr>', { desc = 'Search for vim/plugin commands',  noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', '<cmd>lua require("telescope.builtin").pickers()<cr>', { desc = 'Lists the previous pickers incl. multi-selections',  noremap = true, silent = true })
 
 -- Git
 vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_branches()<cr>', { desc = 'Change git branch', noremap = true, silent = true })

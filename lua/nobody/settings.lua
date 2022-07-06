@@ -37,6 +37,7 @@ opt.scrolloff = 8
 opt.mouse = 'a'
 opt.signcolumn = "yes"
 opt.autochdir = true
+--opt.backupcopy = "yes"
 
 -- Give more space for displaying message.
 opt.cmdheight = 1
