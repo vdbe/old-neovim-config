@@ -26,10 +26,14 @@ local function config(_config)
             nnoremap("<leader>vca", vim.lsp.buf.code_action)
             nnoremap("<leader>vrr", vim.lsp.buf.references)
             nnoremap("<leader>vrn", vim.lsp.buf.rename)
+            nnoremap("<leader>bf", vim.lsp.buf.format)
             inoremap("<C-h>", vim.lsp.buf.signature_help)
         end,
     }, _config or {})
 end
+
+require("lspconfig").tsserver.setup(config())
+require("lspconfig").jsonls.setup(config())
 
 require("lspconfig").rust_analyzer.setup(config({
 	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
