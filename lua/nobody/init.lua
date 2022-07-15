@@ -1,12 +1,5 @@
-require("nobody.settings")
-require("nobody.keymaps")
-require("nobody.plugins")
-require("nobody.colorscheme")
-require("nobody.cmp")
-require("nobody.lsp")
-require("nobody.telescope")
-require("nobody.git-worktree")
-require("nobody.git-signs")
-require("nobody.tree-sitter")
-require("nobody.lualine")
-require("nobody.autocommands")
+require("nobody.set")
+require("nobody.packer")
+
+require("telescope").load_extension("git_worktree")
+
