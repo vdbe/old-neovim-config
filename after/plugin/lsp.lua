@@ -6,6 +6,19 @@ require("nvim-lsp-installer").setup({
     ensure_installed = { "sumneko_lua" }
 })
 
+vim.diagnostic.config({
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    --float = {
+    --    focusable = false,
+    --    style = "minimal",
+    --    border = "rounded",
+    --    source = "always",
+    --    header = "",
+    --    prefix = "",
+    --},
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
