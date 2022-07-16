@@ -16,9 +16,11 @@ local function config(_config)
 
         capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
         on_attach = function(client, bufnr)
+            print('LSP attached')
+
             -- Enable completion triggered by <c-x><c-o>
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  
+
             nnoremap("gd", vim.lsp.buf.definition)
             nnoremap("gD", vim.lsp.buf.declaration)
             nnoremap("K", vim.lsp.buf.hover)
@@ -32,12 +34,27 @@ local function config(_config)
     }, _config or {})
 end
 
-require("lspconfig").tsserver.setup(config())
-require("lspconfig").jsonls.setup(config())
+local lspconfig = require("lspconfig");
+lspconfig.tsserver.setup(config())
+lspconfig.jsonls.setup(config())
+lspconfig.ansiblels.setup(config())
+lspconfig.tailwindcss.setup(config())
+lspconfig.prismals.setup(config())
 
-require("lspconfig").rust_analyzer.setup(config({
-	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-	--[[
+lspconfig.yamlls.setup(config({
+    settings = {
+        yaml = {
+            schemaStore = {
+                url = "https://www.schemastore.org/api/json/catalog.json",
+                enable = true,
+            }
+        }
+    },
+}))
+
+lspconfig.rust_analyzer.setup(config({
+    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+    --[[
     settings = {
         rust = {
             unstable_features = true,
@@ -48,7 +65,7 @@ require("lspconfig").rust_analyzer.setup(config({
     --]]
 }))
 
-require("lspconfig").sumneko_lua.setup(config({
+lspconfig.sumneko_lua.setup(config({
     settings = {
         Lua = {
             runtime = {
