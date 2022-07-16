@@ -4,7 +4,6 @@ local cmp = require("cmp")
 local source_name_map = {
     nvim_lsp      = '[LSP]',
     ultisnips     = '[Snip]',
-    tabnine       = '[T9]',
     buffer        = '[Buf]',
     treesitter    = '[TS]',
     path          = '[Path]',
@@ -85,10 +84,10 @@ local comp_items_text = {
     TypeParameter = 'TypeParam',
 }
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+--local has_words_before = function()
+--  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+--end
 
 local luasnip = require("luasnip")
 
@@ -182,7 +181,6 @@ cmp.setup({
         -- { name = 'nvim_lsp_signature_help', group_index = 1 },
         -- --{ name = 'ultisnips', group_index = 1 },
         -- { name = "luasnip", group_index = 1 },
-        -- -- { name = 'cmp_tabnine', group_index = 1 },
         -- { name = 'treesitter', group_index = 1 },
         -- { name = 'buffer', group_index = 1, Keyword_length = 3  },
         -- { name = 'tags', group_index = 1 },
@@ -197,7 +195,6 @@ cmp.setup({
         { name = 'nvim_lsp_signature_help' },
         --{ name = 'ultisnips' },
         { name = "luasnip" },
-        -- { name = 'cmp_tabnine' },
         { name = 'treesitter' },
         { name = 'buffer' },
         { name = 'tags' },
@@ -209,14 +206,14 @@ cmp.setup({
         { name = 'emoji' },
     },
 
-    window = {
-        documentation = {
-            -- border b_top , b_right , b_bot , b_left , b_topleft , b_topright , b_botright , b_botleft
-            -- border = { '', '', '', ' ', '', '', '', ' ' },
-            -- border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
-            border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
-        },
-    },
+    --window = {
+    --    documentation = {
+    --        -- border b_top , b_right , b_bot , b_left , b_topleft , b_topright , b_botright , b_botleft
+    --        -- border = { '', '', '', ' ', '', '', '', ' ' },
+    --        -- border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
+    --        border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'},
+    --    },
+    --},
 
     -- experimental = {
     -- 	ghost_text = true,
@@ -245,12 +242,3 @@ cmp.setup.cmdline(':', {
     }
     )
 })
-
---local tabnine = require("cmp_tabnine.config")
---tabnine:setup({
---    max_lines = 1000,
---    max_num_results = 20,
---    sort = true,
---    run_on_every_keystroke = true,
---    snippet_placeholder = "..",
---})
