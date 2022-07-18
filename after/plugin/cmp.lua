@@ -20,40 +20,40 @@ local source_name_map = {
 local comp_items = {
     -- if you change or add symbol here
     -- replace corresponding line in readme
-    Text           = ' ',
+    Text          = ' ',
     -- Text        = ' ',
     -- Method      = '',
     -- Method      = '',
-    Method         = ' ',
-    Function       = ' ',
+    Method        = ' ',
+    Function      = ' ',
     -- Constructor = '',
-    Constructor    = ' ',
-    Field          = 'ﰠ ',
-    Variable       = ' ',
-    Class          = 'ﴯ ',
-    Interface      = ' ',
-    Module         = ' ',
+    Constructor   = ' ',
+    Field         = 'ﰠ ',
+    Variable      = ' ',
+    Class         = 'ﴯ ',
+    Interface     = ' ',
+    Module        = ' ',
     -- Property    = 'ﰠ',
-    Property       = '',
-    Unit           = ' 塞',
-    Value          = ' ',
+    Property      = '',
+    Unit          = ' 塞',
+    Value         = ' ',
     -- Enum        = '',
-    Enum           = '了 ',
+    Enum          = '了 ',
     -- Keyword     = '',
-    Keyword        = ' ',
+    Keyword       = ' ',
     -- Snippet     = '',
-    Snippet        = ' ',
-    Color          = ' ',
-    File           = ' ',
-    Reference      = ' ',
-    Folder         = ' ',
-    EnumMember     = '',
+    Snippet       = ' ',
+    Color         = ' ',
+    File          = ' ',
+    Reference     = ' ',
+    Folder        = ' ',
+    EnumMember    = '',
     -- Constant    = '',
-    Constant       = ' ',
-    Struct         = 'פּ ',
-    Event          = ' ',
-    Operator       = ' ',
-    TypeParameter  = '  '
+    Constant      = ' ',
+    Struct        = 'פּ ',
+    Event         = ' ',
+    Operator      = ' ',
+    TypeParameter = '  '
 }
 
 local comp_items_text = {
@@ -84,20 +84,20 @@ local comp_items_text = {
     TypeParameter = 'TypeParam',
 }
 
---local has_words_before = function()
---  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
---end
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 local luasnip = require("luasnip")
 
 cmp.setup({
-    -- enabled = function(args)
-    --     -- print("args:", args)
-    --     -- print("bufftype:", vim.api.nvim_buf_get_option(0, 'buftype'))
-    --     -- print("bufftype?:", vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt')
-    --     return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt'
-    -- end,
+    --enabled = function(args)
+    --    print("args:", args)
+    --    print("bufftype:", vim.api.nvim_buf_get_option(0, 'buftype'))
+    --    print("bufftype?:", vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt')
+    --    return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt'
+    --end,
     snippet = {
         expand = function(args)
             -- For `vsnip` user.
@@ -120,22 +120,37 @@ cmp.setup({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
+        --["<Tab>"] = cmp.mapping(function(fallback)
+        --    if cmp.visible() then
+        --        cmp.select_next_item()
+        --    elseif luasnip.expand_or_jumpable() then
+        --        luasnip.expand_or_jump()
+        --    --elseif has_words_before() then
+        --    --    cmp.complete()
+        --    else
+        --        fallback()
+        --    end
+        --end, { "i", "s" }),
+
+        --["<S-Tab>"] = cmp.mapping(function(fallback)
+        --    if cmp.visible() then
+        --        cmp.select_prev_item()
+        --    elseif luasnip.jumpable(-1) then
+        --        luasnip.jump(-1)
+        --    else
+        --        fallback()
+        --    end
+        --end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            --elseif has_words_before() then
-            --    cmp.complete()
             else
                 fallback()
             end
         end, { "i", "s" }),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
+            if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()
@@ -191,10 +206,10 @@ cmp.setup({
         -- { name = 'zsh', group_index = 2 },
         -- { name = 'emoji', group_index = 2 },
 
+        { name = "luasnip" },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         --{ name = 'ultisnips' },
-        { name = "luasnip" },
         { name = 'treesitter' },
         { name = 'buffer' },
         { name = 'tags' },
@@ -234,11 +249,13 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
-    {
-        { name = 'path' }
-    },
-    {
-        { name = 'cmdline' }
-    }
+        {
+            { name = 'path' }
+        },
+        {
+            { name = 'cmdline' }
+        }
     )
 })
+
+require("luasnip.loaders.from_vscode").lazy_load()
