@@ -6,10 +6,13 @@ require("nvim-lsp-installer").setup({
     ensure_installed = { "sumneko_lua" }
 })
 
+--require("lsp_lines").setup()
+
 vim.diagnostic.config({
     update_in_insert = true,
     underline = true,
     severity_sort = true,
+    virtual_lines = false,
     --float = {
     --    focusable = false,
     --    style = "minimal",
@@ -31,17 +34,25 @@ local function config(_config)
         on_attach = function(client, bufnr)
             --print('LSP attached')
 
+            require("nvim-navic").attach(client, bufnr)
+
             -- Enable completion triggered by <c-x><c-o>
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+            nnoremap("gd", vim.lsp.buf.definition)
+            nnoremap("gt", require('telescope.builtin').lsp_type_definitions)
             nnoremap("gd", vim.lsp.buf.definition)
             nnoremap("gD", vim.lsp.buf.declaration)
             nnoremap("K", vim.lsp.buf.hover)
             nnoremap("<leader>vws", vim.lsp.buf.workspace_symbol)
             nnoremap("<leader>vca", vim.lsp.buf.code_action)
-            nnoremap("<leader>vrr", vim.lsp.buf.references)
+            nnoremap("<leader>vrr", require('telescope.builtin').lsp_references)
             nnoremap("<leader>vrn", vim.lsp.buf.rename)
             nnoremap("<leader>bf", vim.lsp.buf.format)
+            nnoremap("<leader>tl", function()
+                vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
+                require("lsp_lines").toggle()
+            end)
             inoremap("<C-h>", vim.lsp.buf.signature_help)
         end,
     }, _config or {})

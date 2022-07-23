@@ -21,6 +21,8 @@ return require("packer").startup(function()
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+    --use({ "~/projects/lualine.nvim", as = "lualine" });
+
     use {
         'kyazdani42/nvim-tree.lua',
         requires = {
@@ -29,8 +31,9 @@ return require("packer").startup(function()
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
 
-    use( "kylechui/nvim-surround")
+    use("kylechui/nvim-surround")
 
+    use("SmiteshP/nvim-navic")
     use("neovim/nvim-lspconfig")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
@@ -47,6 +50,12 @@ return require("packer").startup(function()
     use("L3MON4D3/LuaSnip")
     use("rafamadriz/friendly-snippets")
     use("saadparwaiz1/cmp_luasnip")
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("lsp_lines").setup()
+        end,
+    })
 
     use("simrat39/symbols-outline.nvim")
 

@@ -1,3 +1,4 @@
-require('lualine').setup({
-    options = { theme = 'gruvbox' }
-})
+local navic = require("nvim-navic")
+vim.g.navic_silence = true
+
+require('lualine').setup()
