@@ -59,6 +59,7 @@ local function config(_config)
 end
 
 local lspconfig = require("lspconfig");
+lspconfig.bashls.setup(config())
 lspconfig.tsserver.setup(config())
 lspconfig.jsonls.setup(config())
 lspconfig.ansiblels.setup(config())
