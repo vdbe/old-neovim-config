@@ -11,6 +11,7 @@ vim.g.maplocalleader = " "
 
 -- Exit to normal mode with jk
 vim.keymap.set({'!'}, 'jk', [[<c-\><c-n>]], {})
+vim.keymap.set({'t'}, 'jk', [[<c-\><c-n>]], {})
 
 -- Move lines in visual mode with J/K
 vnoremap("J", ":m '>+1<CR>gv=gv")

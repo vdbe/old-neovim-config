@@ -59,8 +59,15 @@ return require("packer").startup(function()
 
     use("simrat39/symbols-outline.nvim")
 
+    use({"akinsho/toggleterm.nvim", tag = 'v2.*'})
+
     use("nvim-treesitter/nvim-treesitter", {
         run = ":TSUpdate"
     })
     use("romgrk/nvim-treesitter-context")
+    use("p00f/nvim-ts-rainbow")
+    use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+}
 end)
